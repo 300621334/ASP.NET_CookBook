@@ -1,0 +1,164 @@
+﻿body {
+    background-image: url('images/5.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    /*background-color:brown;*/
+}
+#chefimg
+{
+    margin-top:-35px;
+    float:right;
+}
+.appStateCounter
+{
+position:absolute;
+bottom:0;
+width:100%; 
+    text-align:center;/*text-align:center doesn't work bcoz Absolute positioned doesn't take all the space hence have to EXPLICITLY define 100% width.*/
+    color:brown;
+}
+/*CssClass from asp:ctrl creates a class in HTml to be accessed by a dat(.)
+    and make multiLine txtBox handle to work onlY vertically
+*/
+.desc {
+    resize: vertical; /*handle can be dragged ONLY vertically*/
+    max-height: 400px; /*TextBox handle drag limited to this value*/
+}
+
+#alignAddPageFields
+{
+float:left;
+width:400px;
+text-align:right;
+}
+#alignAddPageDropDownLists
+{
+    display:inline-block;
+    width:400px;
+    text-align:right;
+
+}
+
+#form1 {
+    width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+#top {
+    background-image: url('images/banner.jpg');
+    background-size: cover;
+    height: 150px;
+    background-color: burlywood;
+    position: absolute; /*This position makes  vertical-align:middle; work*/
+    top: 10px;
+    width: 980px;
+    border-radius: 10px;
+}
+
+    #top p {
+        margin-left: 600px;
+        margin-top: 5px;
+        font-size: 40px;
+        font-family: Broadway;
+        /*text-align: center;
+        vertical-align: middle;*/
+        /* vertical-align:middle; doesn't work without parent ele being a position:absolute; */
+    }
+
+div#menu {
+    font-size: 30px;
+    font-weight: 600;
+    opacity: .9;
+    /*background-color: darkgray;*/
+    display: inline-block;
+    margin-top:220px;
+    margin-left: -150px;
+    /*margin-bottom:51px;*/
+    width: 145px;
+    min-height: 890px;
+    /*height: 890px;*/
+    /*float: left;*/
+    padding-top: 20px;
+    border-radius: 10px;
+    text-align:left;/*text align doesn't work coz FLOAT shrinks div. But on removing float, menu-div was vertically aligned to bottom of content-div on it's right. So added vert-align:TOP to align menu to top of content*/
+    vertical-align:top;
+    text-align:center;
+
+
+
+
+}
+#menu ul li{
+
+}
+#menu #nav li a {
+
+    text-decoration: none;
+    color: #FFFF00;
+}
+
+#menu #nav li:hover {
+    transform: scaleX(1.2);
+}
+
+#menu #nav li {
+
+    margin-bottom: 30px;
+}
+
+#content {
+    /*background-image:url('images/content.jpg');
+        */
+    opacity: .75;
+    font-size: x-large;
+    font-weight: 500;
+    display: inline-block;
+    min-height: 805px;
+    /*height: 890px;*/
+    margin-top: 170px;
+    margin-left: 0px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    width: 960px;
+    position:relative;
+}
+
+
+/*#contentImg
+{
+    position:absolute;
+    overflow:hidden;
+    top:165px;
+    right:0;
+    z-index:-1;
+    
+}*/
+
+ul#nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+    ul#nav li {
+        padding: 5px;
+    }
+
+#bottom {
+    background-color: lightgreen;
+    border-radius: 10px;
+    clear: both;
+    position: absolute;
+    top: 1000px;
+    height: 50px;
+    width: 980px;
+    text-align: center;
+}
+
+    #bottom p { /*p is vertically centered e resp to parent div*/
+        vertical-align: middle;
+    }
