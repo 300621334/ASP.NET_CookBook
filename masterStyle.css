@@ -115,7 +115,7 @@ div#menu {
     font-size: x-large;
     font-weight: 500;
     display: inline-block;
-    min-height: 805px;
+    height: 805px;
     /*height: 890px;*/
     margin-top: 170px;
     margin-left: 0px;
@@ -125,7 +125,10 @@ div#menu {
     padding-top: 20px;
     width: 960px;
     position:relative;
+     overflow:scroll;
+
 }
+
 
 
 /*#contentImg
