@@ -70,7 +70,7 @@ public partial class recipes : System.Web.UI.Page
                         }
                     }
                 } 
-                //keep focus on the btn clicked
+                //keep focus on the btn clicked. Extract ctrl invisible to C# like this
             ((Button)e.Item.FindControl("showMore")).Focus();
             }
 
@@ -124,11 +124,17 @@ public partial class recipes : System.Web.UI.Page
 
         //============================================================
 
-        //
+        //Download file & show a pop-up MessageBox to confirm successful op
         using (var client = new WebClient())
         {
             client.DownloadFile("http://studentweb.cencol.ca/shafiqu/aspAssign1/Default.aspx", @"C:\Users\Zoya\Desktop\downLoadedFile.aspx");
+
+            //Response.Write("Download Successful");//this line runs ONLY if above line was successful
+            //Response.End();//erminates the App
+
+
             //System.Windows.Forms.MessageBox.Show("File Downloaded Successfully");//using System.Windows.Forms; giving err so put whole statement here.
+
 
             //System.Windows.Forms.MessageBox.Show( //overload used to keep pop-up window atop
             //    "File Downloaded Successfully",
@@ -149,8 +155,7 @@ public partial class recipes : System.Web.UI.Page
                 );
 
 
-            //Response.Write("Download Successful");//this line runs ONLY if above line was successful
-            //Response.End();//erminates the App
+            
         }
     }
 }
