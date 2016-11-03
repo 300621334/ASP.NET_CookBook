@@ -9,6 +9,7 @@
     <div id="alignAddPageFields">
         <uc:nameLbl ID="recipeName" ucProp="Recipe Name: " runat="server" />
         <uc:nameLbl ID="submitBy" ucProp="Submitted By: " runat="server" />
+<%--        <asp:DropDownList ID="submitByList" runat="server" /><br />--%>
         <uc:nameLbl ID="cookTime" ucProp="Cooking Time: " runat="server" />
         <uc:nameLbl ID="portions" ucProp="Portions: " runat="server" />
 

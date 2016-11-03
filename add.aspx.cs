@@ -10,7 +10,38 @@ public partial class add : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        ////category.Items.Clear();
+        ////cuisine.Items.Clear();
 
+        ////http://stackoverflow.com/questions/7227510/what-is-the-right-way-to-populate-a-dropdownlist-from-a-database
+
+        //OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + Server.MapPath("cookbook2.mdb"));
+        //OleDbCommand fillCategoriesCmd = new OleDbCommand( "SELECT catName FROM category" , conn );
+        //conn.Open();
+        //OleDbDataReader reader = fillCategoriesCmd.ExecuteReader();//open() needed for ExecuteReader
+        //category.DataSource = reader;
+        //category.DataTextField = "catName";//col name from DB tbl whose value is used as TEXT="" for dropdown items
+        //category.DataValueField = "catName";//col which provides value="" for dropdown items
+        //category.DataBind();
+
+        ////fill cuisine start from a new command. Connection is the same.
+        //OleDbCommand fillCuisineCmd = new OleDbCommand("SELECT DISTINCT cuisine FROM recipes", conn);
+        //reader = fillCuisineCmd.ExecuteReader();
+        //cuisine.DataSource = reader;
+        //cuisine.DataTextField = "cuisine";
+        //cuisine.DataValueField = "cuisine";
+        //cuisine.DataBind();
+
+        ////populate Submited By - submitByList
+        //OleDbCommand fillSubmitByCmd = new OleDbCommand("SELECT  userName FROM users", conn);
+        //reader = fillSubmitByCmd.ExecuteReader();
+        //submitByList.DataSource = reader;
+        //submitByList.DataTextField = "userName";
+        //submitByList.DataValueField = "userName";
+        //submitByList.DataBind();
+
+
+        //conn.Close();
     }
 
 
@@ -45,6 +76,7 @@ public partial class add : System.Web.UI.Page
         //insertIntoCmd.Parameters["@recipeName"].Value = id.......;//removed ID column
         insertIntoCmd.Parameters["@recipeName"].Value = recipeName.ucProp;//try read property(get/set) of User Ctrl "ucProp"
         insertIntoCmd.Parameters["@fromName"].Value = submitBy.ucProp;
+        //insertIntoCmd.Parameters["@fromName"].Value = submitByList.SelectedValue;
         insertIntoCmd.Parameters["@cookingTime"].Value = cookTime.ucProp;
         insertIntoCmd.Parameters["@portions"].Value = portions.ucProp;
         insertIntoCmd.Parameters["@category"].Value = category.SelectedItem.ToString();
