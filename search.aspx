@@ -23,7 +23,11 @@
     <br />    <br />
 
 
-    <asp:Button ID="searchBtn" runat="server" Text="Search" />
+    <asp:Button OnClick="searchBtn_Click" ID="searchBtn" runat="server" Text="Search" />
+    <br /><br />
+
+    <asp:GridView ID="searchGridView" runat="server"></asp:GridView>
+
 
 
 </asp:Content>

@@ -13,16 +13,20 @@ public partial class add : System.Web.UI.Page
         ////category.Items.Clear();
         ////cuisine.Items.Clear();
 
-        ////http://stackoverflow.com/questions/7227510/what-is-the-right-way-to-populate-a-dropdownlist-from-a-database
+        //http://stackoverflow.com/questions/7227510/what-is-the-right-way-to-populate-a-dropdownlist-from-a-database
 
-        //OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + Server.MapPath("cookbook2.mdb"));
-        //OleDbCommand fillCategoriesCmd = new OleDbCommand( "SELECT catName FROM category" , conn );
-        //conn.Open();
-        //OleDbDataReader reader = fillCategoriesCmd.ExecuteReader();//open() needed for ExecuteReader
-        //category.DataSource = reader;
-        //category.DataTextField = "catName";//col name from DB tbl whose value is used as TEXT="" for dropdown items
-        //category.DataValueField = "catName";//col which provides value="" for dropdown items
-        //category.DataBind();
+        OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + Server.MapPath("cookbook.mdb"));
+        OleDbCommand fillCategoriesCmd = new OleDbCommand("SELECT category FROM categories", conn);
+        conn.Open();
+        OleDbDataReader reader = fillCategoriesCmd.ExecuteReader();//open() needed for ExecuteReader
+        category.DataSource = reader;
+        category.DataTextField = "category";//col name from DB tbl whose value is used as TEXT="" for dropdown items
+        category.DataValueField = "category";//col which provides value="" for dropdown items
+        category.DataBind();
+        conn.Close();
+
+
+
 
         ////fill cuisine start from a new command. Connection is the same.
         //OleDbCommand fillCuisineCmd = new OleDbCommand("SELECT DISTINCT cuisine FROM recipes", conn);
@@ -45,9 +49,10 @@ public partial class add : System.Web.UI.Page
     }
 
 
-    //on btn click, saveRecipe into DB
+    //on btn click, saveRecipe into DB & if invalid ctrl display error/red box etc
     protected void saveRecipe(object sender, EventArgs e)
     {
+        //write to DB
         OleDbConnection conn = null;
         OleDbCommand insertIntoCmd = null;
         OleDbDataReader reader = null;
@@ -111,6 +116,25 @@ public partial class add : System.Web.UI.Page
             if (conn != null) conn.Close();
 
         }
+        //submitBtn.Focus();//doesn't work probably bcoz validators PostBack the page AFT this handler is long gone!!!
+
+
+
+        ////need to disable clientside validation for following to work
+        ////http://stackoverflow.com/questions/665603/asp-net-how-to-change-the-background-color-of-a-control-that-failed-validation
+        ////color red the required incomplete fields
+        //Page.Validate();
+        //foreach(BaseValidator v in Page.Validators)//collection of validators iterated thru
+        //{
+        //    if(!v.IsValid)
+        //    {
+        //        Control c = (Control)this.FindControl(v.ControlToValidate);//"this" is the Page
+        //        TextBox t = (TextBox)c;//recipeName$TextBox1 is the CtrlToValidate w is a TextBox
+        //        t.BackColor = System.Drawing.Color.Red;
+
+        //    }
+        //}
+
     }
 
 
