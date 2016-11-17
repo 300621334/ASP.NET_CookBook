@@ -4,13 +4,16 @@
 
     <h1>Address Book using GridView</h1>
 
-<asp:GridView AutoGenerateColumns="False" CssClass="addressGridView" id="grid" runat="server" BackColor="LightGoldenrodYellow" BorderColor="Tan" BorderWidth="1px" CellPadding="2" ForeColor="Black" GridLines="None" OnSelectedIndexChanged="grid_SelectedIndexChanged" >
+<asp:GridView AutoGenerateColumns="False" CssClass="addressGridView" id="grid" runat="server" BackColor="LightGoldenrodYellow" BorderColor="Tan" BorderWidth="1px" CellPadding="2" ForeColor="Black" GridLines="None" OnSelectedIndexChanged="grid_SelectedIndexChanged" OnSelectedIndexChanging="grid_SelectedIndexChanging" OnRowCancelingEdit="grid_RowCancelingEdit" OnRowEditing="grid_RowEditing" >
     <AlternatingRowStyle BackColor="PaleGoldenrod" />
     <Columns>
         <asp:BoundField DataField="CookName" HeaderText="Name" />
         <asp:HyperLinkField DataTextField="CookEmail" NavigateUrl="search.aspx" HeaderText="eMail" />
         <%--No code for asp:ButtonField's action, it's secretly done by this ctrl. Clicking this btm fires "SelectedIndexChanged" made by doubleClick on grid--%>
         <asp:ButtonField CommandName="Select" HeaderText="ButtonField" ShowHeader="True" Text="Select This Row" />
+        
+        <asp:CommandField ShowEditButton="True" HeaderText="cmdFld.ShowEditBtn" />
+        <asp:CommandField SelectText="same fn as BtnFld" ShowSelectButton="True" HeaderText="cmdFld.SelectTxt" />
 
 
 
@@ -29,7 +32,36 @@
    
     <br /><asp:Label ID="gridLbl" runat="server" Text=""></asp:Label>
 
+<%--==========DetailsView to display details of ONE record in rows instead of columns as in GridView========--%>
+<%--==========DetailsView to display details of ONE record in rows instead of columns as in GridView========--%>
+<%--==========DetailsView to display details of ONE record in rows instead of columns as in GridView========--%>
+    <asp:DetailsView AutoGenerateRows="False" ID="DetailsView1" runat="server" Height="50px" Width="125px" OnModeChanging="DetailsView1_ModeChanging">
+        <fields>
+<%--            <asp:BoundField DataField="cookName" HeaderText="Name" />--%>
+            <asp:BoundField DataField="cookAddress" HeaderText="Add" />
+            <asp:BoundField DataField="cookPhone" HeaderText="Ph" />
 
-    <asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="125px"></asp:DetailsView>
+<%--a BoundField converted to TemplateField as ...smartTag..EditField..ConvertToTemplate..(so we can customize looks when this field enters EDIT/INSERT modes etc)--%>
+            <asp:TemplateField HeaderText="eMail">
+                <EditItemTemplate>
+                    <asp:TextBox ID="editEmailTxtBox" runat="server" Text='<%# Bind("cookEmail") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <InsertItemTemplate>
+                    <asp:TextBox ID="insertEmailTxtBox" runat="server" Text='<%# Bind("cookEmail") %>'></asp:TextBox>
+                </InsertItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="emailLbl" runat="server" Text='<%# Bind("cookEmail") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+
+   <%--smartTag..NewField..CommandField..check the EDIT box..Then boltOfLight..doubleClick ModeChangING to create handler for EDIT/CNACEL. while for UPDATE u need another handler updatING...--%>
+            <asp:CommandField ShowEditButton="True" />
+        </fields>
+
+        <HeaderTemplate>
+            <%# "Name: " + Eval("cookName") %>
+        </HeaderTemplate>
+
+    </asp:DetailsView>
     <asp:Label id="focusHereWhenGridViewRowSelected" runat="server" />
 </asp:Content>

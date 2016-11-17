@@ -37,6 +37,7 @@ public partial class addressBook : System.Web.UI.Page
             reader = query.ExecuteReader();
             grid.DataSource = reader;
             grid.DataKeyNames = new string[] {"CookName"};//Used in DetailsBind() //we tell DataGrid which array of keys(fields) to store for use in asp:DetailsView p-483. We 
+            /*like primary KEY. When a row is selected in DataGrid, that selectedIndex can be used to fetch value of this col.*/
             grid.DataBind();
             //for asp:repeater & asp:DataList we need to use <ItemTemplate> etc to generate tbl on webpage. But DataGrid makes tbl auto
             //to show select cols out of query result, in ctrl put AutoGenerateColumns="false" & put <columns> & <BoundField>
@@ -53,24 +54,44 @@ public partial class addressBook : System.Web.UI.Page
 
     //on selecting a row in DataView, display info in label below it
     protected void grid_SelectedIndexChanged(object sender, EventArgs e)
+    {  
+        BindDetails(); //feed data into DetailsView
+        focusHereWhenGridViewRowSelected.Focus();//focus not working !!!!!!
+    }
+
+
+    //to prevent populating DetailView for particular user, use handler e '-ing' that fires just before 'Changed':
+    protected void grid_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+    {
+
+        //int gridRowSelected = grid.SelectedIndex;
+        //Above stat err bcoz if nothing was selected already, .SelectedIndex is negative -1 in -ing method
+        //So rather use stat below, where event to tells us taht user is trying to select a row with this index#
+
+        int gridRowSelected = e.NewSelectedIndex;
+        string cookName = (string)grid.DataKeys[gridRowSelected].Value;
+
+        if (cookName == "mno")
+        {
+            e.Cancel = true;
+        }
+
+        //empty the DetailsView1, else previous row selected keeps showing
+        DetailsView1.DataSource = null;
+        DetailsView1.DataBind();
+    }
+
+
+
+    private void BindDetails()
     {
         int gridRowIndex = grid.SelectedIndex; //index of row selected
         GridViewRow aRow = grid.Rows[gridRowIndex]; //pull WHOLE row
         string aCell = aRow.Cells[0].Text; //pull one cell out of whole row
         gridLbl.Text = "Details of selected cook \"" + aCell + "\" are below";
 
-        //feed data into DetailsView
-        BindDetails();
 
 
-        //focus not working !!!!!!
-        focusHereWhenGridViewRowSelected.Focus();
-
-
-    }
-
-    private void BindDetails()
-    {
         int selectedIndex = grid.SelectedIndex;//which row is selected in GridView
         string cookName = (String)grid.DataKeys[selectedIndex].Value;//from selected row in GridView, pull value of col defined in DataKeyNames
         //pull DB again. This time use selected row from GridView & use name in that row to pull record of that cook ONLY & show in DetailsView
@@ -81,6 +102,8 @@ public partial class addressBook : System.Web.UI.Page
         query = new OleDbCommand(queryStr, conn);//this query has a placeHolder @cookNameParam to be fed a value below
         query.Parameters.Add("cookNameParam", OleDbType.VarChar);//
         query.Parameters["cookNameParam"].Value = cookName;//str from DataKeys fed to SQL
+        //query.Parameters.AddWithValue("@cookNameParam", cookName); is alternative to 2 stats above.
+
         try
         {
             conn.Open();
@@ -98,4 +121,31 @@ public partial class addressBook : System.Web.UI.Page
         }
 
     }
+
+
+    //need this to enter edit mode (p-494) may be to safe guard data. Note tht it's "-ing" method
+    //DetailsView does NOT auto switch to EDIT mode for some reason//this method maked EDIT & CANCEL btn work but UPDATE needs it's own handler
+    protected void DetailsView1_ModeChanging(object sender, DetailsViewModeEventArgs e)
+    {
+        /*e.NewMode tells app that user requested to enter into a mode other than 
+         *'ReadOnly' mode e.g. into an EDIT mode. App should explicitly allow to enter edit mode*/
+        DetailsView1.ChangeMode(e.NewMode);
+        BindDetails();
+    }
+
+
+    //GridView requires explicit persimmion to enter EDIT mode:
+    protected void grid_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        grid.EditIndex = e.NewEditIndex;
+        bindDataGrid(); //not  grid.DataBind();
+    }
+
+    protected void grid_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        grid.EditIndex = -1;
+        bindDataGrid();
+    }
+
+    
 }
