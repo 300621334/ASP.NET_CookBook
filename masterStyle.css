@@ -1,23 +1,99 @@
-﻿body {
+﻿/*CSS selector tester:
+    http://www.w3schools.com/cssref/trysel.asp
+    http://www.w3schools.com/jquery/trysel.asp
+    :before :after content:
+    http://www.w3schools.com/cssref/pr_gen_content.asp
+    http://www.w3schools.com/cssref/pr_gen_content.asp
+
+    style GridView:
+    http://www.parallelcodes.com/styling-the-gridview-in-asp-net/
+*/
+body {
     background-image: url('images/5.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     /*background-color:brown;*/
 }
-#chefimg
-{
-    margin-top:-35px;
-    float:right;
+
+.grighead{
+    font-family:Broadway;
+    font-size: 24px;
+
+    /*border: none 0px transparent;*/
 }
-.appStateCounter
-{
-position:absolute;
-bottom:0;
-width:100%; 
-    text-align:center;/*text-align:center doesn't work bcoz Absolute positioned doesn't take all the space hence have to EXPLICITLY define 100% width.*/
-    color:brown;
+.gridrow{
+    text-align:center;
 }
-/*CssClass from asp:ctrl creates a class in HTml to be accessed by a dat(.)
+.gridrow:hover
+{
+        background-color:darkorange;
+}
+.grid
+{
+    border: solid 5px black;
+    /*width: 90%;
+    min-width: 90%*/
+
+    /*border-collapse: separate;
+    border-spacing: 2px;*/
+}
+.grid th, .detailview tr:first-child {
+    background-color:darkorange;
+}
+
+.grid th:not(:first-child):not(:last-child):after  
+/*put a sort arrow in all 'th' except the very first/last one:
+  http://stackoverflow.com/questions/12289853/css-notfirst-child-selector
+    http://stackoverflow.com/questions/13981111/how-to-select-all-children-except-first-and-last-with-css-selectors
+*/
+{
+    content: url(images//sort.png);
+}
+.grid a{
+    text-decoration:none;
+    color:darkgreen;
+    font-weight:bold;
+}
+.grid a:hover
+{
+    color:red;
+    
+}
+.grid th, .grid td, .detailview td
+{
+    padding: 0  10px 0 20px;
+}
+.grid tr:nth-child(even) /*.grid tr:nth-last-of-type(even)*/
+{
+        background-color:burlywood;
+}
+.grid tr:nth-child(even):hover /*.gridrow:hover alone wasn't doing hover-effect over even rows!! hence added this (even):hover */
+{
+        background-color:darkorange;
+}
+.detailview tr
+{
+            background-color:burlywood;
+            display:inline-block;
+            width:900px;
+
+}
+
+#chefimg {
+    margin-top: -35px;
+    float: right;
+}
+
+.appStateCounter {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center; 
+    /*text-align:center doesn't work bcoz Absolute positioned doesn't take all the space hence
+      have to EXPLICITLY define 100% width.*/
+    color: brown;
+}
+/*CssClass from asp:ctrl creates a class in HTml to be accessed by a dat(.) not by #
     and make multiLine txtBox handle to work onlY vertically
 */
 .desc {
@@ -25,18 +101,16 @@ width:100%;
     max-height: 400px; /*TextBox handle drag limited to this value*/
 }
 
-#alignAddPageFields
-{
-float:left;
-width:400px;
-text-align:right;
+#alignAddPageFields {
+    float: left;
+    width: 400px;
+    text-align: right;
 }
-#alignAddPageDropDownLists
-{
-    display:inline-block;
-    width:400px;
-    text-align:right;
 
+#alignAddPageDropDownLists {
+    display: inline-block;
+    width: 400px;
+    text-align: right;
 }
 
 #form1 {
@@ -73,7 +147,7 @@ div#menu {
     opacity: .9;
     /*background-color: darkgray;*/
     display: inline-block;
-    margin-top:220px;
+    margin-top: 220px;
     margin-left: -150px;
     /*margin-bottom:51px;*/
     width: 145px;
@@ -82,19 +156,15 @@ div#menu {
     /*float: left;*/
     padding-top: 20px;
     border-radius: 10px;
-    text-align:left;/*text align doesn't work coz FLOAT shrinks div. But on removing float, menu-div was vertically aligned to bottom of content-div on it's right. So added vert-align:TOP to align menu to top of content*/
-    vertical-align:top;
-    text-align:center;
-
-
-
-
+    text-align: left; /*text align doesn't work coz FLOAT shrinks div. But on removing float, menu-div was vertically aligned to bottom of content-div on it's right. So added vert-align:TOP to align menu to top of content*/
+    vertical-align: top;
+    text-align: center;
 }
-#menu ul li{
 
+#menu ul li {
 }
+
 #menu #nav li a {
-
     text-decoration: none;
     color: #FFFF00;
 }
@@ -104,7 +174,6 @@ div#menu {
 }
 
 #menu #nav li {
-
     margin-bottom: 30px;
 }
 
@@ -124,9 +193,8 @@ div#menu {
     padding-left: 20px;
     padding-top: 20px;
     width: 960px;
-    position:relative;
-     overflow:scroll;
-
+    position: relative;
+    overflow: scroll;
 }
 
 
@@ -166,7 +234,7 @@ ul#nav {
         vertical-align: middle;
     }
 
-    /*.addressGridView tbody tr td, .addressGridView tbody tr th
+/*.addressGridView tbody tr td, .addressGridView tbody tr th
     {
         padding:0 50px 0 50px;
     }*/

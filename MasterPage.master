@@ -10,7 +10,8 @@
     </asp:ContentPlaceHolder>--%>
 
 <link rel="stylesheet" href="masterStyle.css" />
-    <link rel="shortcut icon" href="images/icon.png" />
+<link rel="shortcut icon" href="images/icon.png" />
+
 </head>
 <body>
      
@@ -25,10 +26,11 @@
         <%--<img src="" />--%>
        <ul id="nav"> 
         <li><a href="Default.aspx">HOME</a></li>
-           <li><a href="recipes.aspx">RECIPES</a></li>
+        <li><a href="recipes.aspx">RECIPES</a></li>
+        <li><a href="rcp.aspx">RECIPES2</a></li>
         <li><a href="add.aspx">ADD</a></li>
         <li><a href="search.aspx">SEARCH</a></li>
-        <li><a href="addressBook.aspx">Addresses</a></li>
+       <%-- <li><a href="addressBook.aspx">Addresses</a></li>--%>
 
            </ul>
         </div>

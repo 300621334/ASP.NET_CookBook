@@ -10,7 +10,7 @@
         {
             return TextBox1.Text;
         }
-        
+
         /*prop can be be "set"/invoked in 2 ways: 
          (1)From within the tag assign value to property as: ucProp="txtToDisplayOnLbl"
          (2)From C# script assign value to prop as: idOfTag.ucProp = "..." */
@@ -18,6 +18,14 @@
         set
         {
             Label1.Text = value;
+        }
+    }
+
+    public string ucText
+    {
+        set
+        {
+            TextBox1.Text = value;
         }
     }
 </script>

@@ -20,6 +20,7 @@ public partial class _Default : System.Web.UI.Page
         {
             Application["pageCounter"] = (int)Application["pageCounter"] + 1;
         }
+        //set text of lbl e id="appStateCounter"
         appStateCounter.Text += (int)Application["pageCounter"];
 
 

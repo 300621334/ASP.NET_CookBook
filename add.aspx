@@ -1,4 +1,4 @@
-﻿<%@ Page MasterPageFile="MasterPage.master" Language="C#" AutoEventWireup="true" CodeFile="add.aspx.cs" Inherits="add" %>
+﻿<%@ Page ViewStateMode="Disabled" MasterPageFile="MasterPage.master" Language="C#" AutoEventWireup="true" CodeFile="add.aspx.cs" Inherits="add" %>
 
 <%--Register the custom-made user-ctrl--%>
 <%@ Register TagPrefix="uc" TagName="nameLbl" Src="nameLabelUserCtrl.ascx" %>
@@ -32,6 +32,7 @@
         
             Select Category: 
         <asp:DropDownList ID="category" runat="server">
+ <%--i'm populating categories thru C# code hence following ListItems r overridden when webpage launches--%>
             <asp:ListItem Text="category-1" />
             <asp:ListItem Text="category-2" />
             <asp:ListItem Text="category-3" />
@@ -77,6 +78,7 @@
 
     <p>
         <asp:Button OnClick="saveRecipe" OnClientClick="" ID="submitBtn" runat="server" Text="Save Recipe" />
+        <input type="reset" value="Clear Form" />
     </p>
 
 </asp:Content>

@@ -10,24 +10,26 @@
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="search" runat="server" >
 
     <%--For radio btn to fire OnCheckedChanged, must have AutoPostBack="true"--%>
-    Search by Recipe Name:
-    <asp:RadioButton AutoPostBack="true"   GroupName="searchCriteria" ID="radSearchRcpName" runat="server" OnCheckedChanged="rad_CheckedChanged" /><br />
-    Search by Person Name:
+    <%--AssociatedControlID="" allows clicking text to check radio, like for="" att of <label> in HTML forms--%>
+    <asp:label runat="server" AssociatedControlID="radSearchRcpName">General Search:</asp:label>
+    <asp:RadioButton  AutoPostBack="true"   GroupName="searchCriteria" ID="radSearchRcpName" runat="server" OnCheckedChanged="rad_CheckedChanged" /><br />
+    <asp:label AssociatedControlID="radSearchSubmitBy" runat="server"> Search by Person Name:</asp:label>
     <asp:RadioButton  AutoPostBack="true" OnCheckedChanged="rad_CheckedChanged" GroupName="searchCriteria" ID="radSearchSubmitBy" runat="server" /><br />
     <br />    <br />
     <uc:nameLbl  Visible="false" ID="searchBy" runat="server"  />
     <br />
     
-    Search in Public Recipes: <asp:CheckBox ID="CheckBox1" runat="server" />
+<%--    Search in Public Recipes: <asp:CheckBox ID="CheckBox1" runat="server" />--%>
 
     <br />    <br />
 
 
     <asp:Button OnClick="searchBtn_Click" ID="searchBtn" runat="server" Text="Search" />
+    <button type="reset">Clear All</button>
     <br /><br />
 <%--================================================================================--%>
     
-    
+    <%--following grid is not used --%>
     <asp:GridView ID="searchGridView" runat="server"></asp:GridView>
 
 
